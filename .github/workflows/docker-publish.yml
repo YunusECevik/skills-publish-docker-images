@@ -24,5 +24,6 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build . --tag ghcr.io/${{ toLower(github.repository) }}/stackoverflown:main
-          docker push ghcr.io/${{ toLower(github.repository) }}/stackoverflown:main
+          IMAGE_NAME="ghcr.io/$(echo "$GITHUB_REPOSITORY" | tr '[:upper:]' '[:lower:]')/stackoverflown:main"
+          docker build . --tag "$IMAGE_NAME"
+          docker push "$IMAGE_NAME"
